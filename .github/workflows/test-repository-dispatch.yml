@@ -22,4 +22,5 @@ jobs:
         uses: anthropics/claude-code-action@inigo/add-repository-dispatch-support
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: ${{ github.event.inputs.test_message || 'Hello Claude! This is a test of repository_dispatch event support. Please acknowledge that you received this event and briefly describe what triggered this workflow.' }}
