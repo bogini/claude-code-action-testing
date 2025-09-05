@@ -1,0 +1,25 @@
+name: Test Repository Dispatch
+
+on:
+  repository_dispatch:
+    types: [test-claude-action]
+  workflow_dispatch:
+    inputs:
+      test_message:
+        description: 'Test message for Claude'
+        required: false
+        default: 'Hello Claude! Please analyze this repository_dispatch test.'
+
+jobs:
+  test-claude-action:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Test Claude Code Action with Repository Dispatch
+        uses: anthropics/claude-code-action@inigo/add-repository-dispatch-support
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: ${{ github.event.inputs.test_message || 'Hello Claude! This is a test of repository_dispatch event support. Please acknowledge that you received this event and briefly describe what triggered this workflow.' }}
